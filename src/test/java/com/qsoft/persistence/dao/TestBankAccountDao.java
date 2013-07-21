@@ -15,6 +15,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import javax.validation.Validator;
+
+import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -40,6 +46,8 @@ public class TestBankAccountDao {
     private DataSource dataSourceTest;
 
     private IDatabaseTester iDatabaseTester;
+
+    private static Validator validation;
 
     @Before
     public void setup() throws Exception
@@ -83,4 +91,13 @@ public class TestBankAccountDao {
         assertEquals(account.getBalance(), 100.0);
         assertEquals(account.getTime_stamp(), 1000);
     }
+    @Test
+    public void testSaveABankAccountWithLengthOfNumberAccountGreater10(){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validation = factory.getValidator();
+        BankAccount bankAccount = new BankAccount("01234567890", 100L);
+        Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckNumberAccount.class);
+        assertEquals(violations.size(),1);
+    }
+
 }
