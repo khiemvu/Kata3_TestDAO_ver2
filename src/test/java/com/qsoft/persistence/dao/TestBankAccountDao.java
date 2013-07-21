@@ -121,4 +121,11 @@ public class TestBankAccountDao {
         assertEquals(violations.size(),1);
         assertEquals(violations.iterator().next().getMessage(), "Value min of balance must is 0");
     }
+    @Test
+    public void testOpenAccountWithNoTimeStamp(){
+        BankAccount bankAccount = new BankAccount("012345678");
+        Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckTimeStamp.class);
+        assertEquals(violations.size(),1);
+        assertEquals(violations.iterator().next().getMessage(), "TimeStamp is compulsory");
+    }
 }
