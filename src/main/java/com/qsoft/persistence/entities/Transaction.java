@@ -1,6 +1,7 @@
 package com.qsoft.persistence.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,7 +43,7 @@ public class Transaction
     public Transaction(){
 
     }
-
+    @Min(value = 0, message = "Amount money for transaction must greater 0")
     public double getBalance() {
         return balance;
     }
