@@ -147,4 +147,12 @@ public class TestBankAccountDao {
         assertEquals(1, violations.size());
         assertEquals(violations.iterator().next().getMessage(), "Amount money for transaction must greater 0");
     }
+    @Test
+    public void testGetAllTransactionOfAAccount(){
+        List<Transaction> listTransaction = transactionDAO.getAllTransaction("0123456789");
+        assertEquals(3, listTransaction.size());
+        assertEquals(10000.0, listTransaction.get(0).getBalance());
+        assertEquals("withdraw", listTransaction.get(1).getDes());
+        assertEquals(60000L, listTransaction.get(2).getTime_stamp());
+    }
 }
