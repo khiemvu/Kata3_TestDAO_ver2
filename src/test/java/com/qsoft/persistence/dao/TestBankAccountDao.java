@@ -80,7 +80,7 @@ public class TestBankAccountDao {
     public void testGetInfoABankAccountFromDB(){
         BankAccount account = bankAccountDAO.findAccount("0123456789");
         assertNotNull(account);
-        assertEquals(account.getBalance(), 100);
+        assertEquals(account.getBalance(), 100.0);
         assertEquals(account.getTime_stamp(), 1000);
     }
 }
