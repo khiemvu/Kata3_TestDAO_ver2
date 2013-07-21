@@ -117,7 +117,7 @@ public class TestBankAccountDao {
     @Test
     public void testOpenAccountWithBalanceLessThanZero(){
         BankAccount bankAccount = new BankAccount("012345678", -100, 100L);
-        Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckBalance.class);
+        Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount);
         assertEquals(violations.size(),1);
         assertEquals(violations.iterator().next().getMessage(), "Value min of balance must is 0");
     }

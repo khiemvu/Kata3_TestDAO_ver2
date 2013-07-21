@@ -1,9 +1,11 @@
 package com.qsoft.persistence.entities;
 
 import com.qsoft.persistence.dao.validator.CheckNumberAccount;
+
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,6 +44,12 @@ public class BankAccount
 
     }
 
+    public BankAccount(String number_acc, double balance, long time_stamp) {
+        this.number_acc = number_acc;
+        this.balance = balance;
+        this.time_stamp = time_stamp;
+    }
+
     public long getTime_stamp() {
         return time_stamp;
     }
@@ -59,7 +67,7 @@ public class BankAccount
     {
         this.id = id;
     }
-
+    @Min(value = 0, message = "Value min of balance must is 0")
     public double getBalance()
     {
         return balance;
