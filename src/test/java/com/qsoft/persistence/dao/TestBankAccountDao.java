@@ -140,4 +140,11 @@ public class TestBankAccountDao {
         assertEquals(1000L, transactionList.get(3).getTime_stamp());
         assertEquals(1000.0, transactionList.get(3).getBalance());
     }
+    @Test
+    public void testDoATransactionWithAmountLessThanZero(){
+        Transaction transaction = new Transaction("0123456789", -100, "deposit", 1500L);
+        Set<ConstraintViolation<Transaction>> violations = validation.validate(transaction);
+        assertEquals(1, violations.size());
+        assertEquals(violations.iterator().next().getMessage(), "Amount money for transaction must greater 0");
+    }
 }
