@@ -101,5 +101,15 @@ public class TestBankAccountDao {
         assertEquals(violations.size(),1);
         assertEquals(violations.iterator().next().getMessage(), "Number Account must has length is 10");
     }
+    @Test
+    public void testSaveABankAccountWithLengthOfNumberAccountLessThan10(){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validation = factory.getValidator();
+        BankAccount bankAccount = new BankAccount("012345678", 100L);
+
+        Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckNumberAccount.class);
+        assertEquals(violations.size(),1);
+        assertEquals(violations.iterator().next().getMessage(), "Number Account must has length is 10");
+    }
 
 }
