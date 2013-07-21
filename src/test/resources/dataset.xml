@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <bank_account id="1" number_acc="0123456789" balance="100" des="openBankAccount" time_stamp="1000"/>
+    <transaction id_transaction="1" number_account="0123456789" amount="10000" des="deposit" time_stamp="2000"/>
+    <transaction id_transaction="2" number_account="0123456789" amount="1000" des="withdraw" time_stamp="30000"/>
+    <transaction id_transaction="3" number_account="0123456789" amount="1000" des="withdraw" time_stamp="60000"/>
+</dataset>
