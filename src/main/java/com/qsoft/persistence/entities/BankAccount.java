@@ -1,11 +1,12 @@
 package com.qsoft.persistence.entities;
 
-import com.qsoft.persistence.dao.validator.CheckNumberAccount;
-
+import com.qsoft.persistence.entities.validator.CheckNumberAccount;
+import com.qsoft.persistence.entities.validator.CheckTimeStamp;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,6 +51,10 @@ public class BankAccount
         this.time_stamp = time_stamp;
     }
 
+    public BankAccount(String number_acc) {
+        this.number_acc = number_acc;
+    }
+    @NotNull(message = "TimeStamp is compulsory", groups = CheckTimeStamp.class)
     public long getTime_stamp() {
         return time_stamp;
     }

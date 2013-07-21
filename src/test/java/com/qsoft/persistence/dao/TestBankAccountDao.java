@@ -1,7 +1,8 @@
 package com.qsoft.persistence.dao;
 
-import com.qsoft.persistence.dao.validator.CheckNumberAccount;
 import com.qsoft.persistence.entities.BankAccount;
+import com.qsoft.persistence.entities.Transaction;
+import com.qsoft.persistence.entities.validator.CheckNumberAccount;
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
@@ -21,6 +22,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.List;
 import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
@@ -121,11 +123,21 @@ public class TestBankAccountDao {
         assertEquals(violations.size(),1);
         assertEquals(violations.iterator().next().getMessage(), "Value min of balance must is 0");
     }
+//    @Test
+//    public void testOpenAccountWithNoTimeStamp(){
+//        BankAccount bankAccount = new BankAccount("0123456789");
+//        Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckTimeStamp.class);
+//        assertEquals(violations.size(),1);
+//        assertEquals(violations.iterator().next().getMessage(), "TimeStamp is compulsory");
+//    }
     @Test
-    public void testOpenAccountWithNoTimeStamp(){
-        BankAccount bankAccount = new BankAccount("012345678");
-        Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckTimeStamp.class);
-        assertEquals(violations.size(),1);
-        assertEquals(violations.iterator().next().getMessage(), "TimeStamp is compulsory");
+    public void testSaveATransactionToDB(){
+        Transaction transaction = new Transaction("0123456789", 1000, "deposit", 1000L);
+        transactionDAO.saveTransaction(transaction);
+        List<Transaction> transactionList = transactionDAO.getAllTransaction("0123456789");
+        assertEquals(4, transactionList.size());
+        assertEquals("deposit", transactionList.get(3).getDes());
+        assertEquals(1000L, transactionList.get(3).getTime_stamp());
+        assertEquals(1000.0, transactionList.get(3).getBalance());
     }
 }
