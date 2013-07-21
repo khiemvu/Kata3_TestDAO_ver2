@@ -1,5 +1,6 @@
 package com.qsoft.persistence.dao;
 
+import com.qsoft.persistence.dao.validator.CheckNumberAccount;
 import com.qsoft.persistence.entities.BankAccount;
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
@@ -17,9 +18,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.sql.DataSource;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
 import javax.validation.Validator;
-
+import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
@@ -96,8 +96,10 @@ public class TestBankAccountDao {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validation = factory.getValidator();
         BankAccount bankAccount = new BankAccount("01234567890", 100L);
+
         Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckNumberAccount.class);
         assertEquals(violations.size(),1);
+        assertEquals(violations.iterator().next().getMessage(), "Number Account must has length is 10");
     }
 
 }

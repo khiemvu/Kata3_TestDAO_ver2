@@ -1,5 +1,8 @@
 package com.qsoft.persistence.entities;
 
+import com.qsoft.persistence.dao.validator.CheckNumberAccount;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 
 /**
@@ -19,7 +22,7 @@ public class BankAccount
     @Column(name="id")
     private Long id;
 
-    @Column(name="number_acc")
+    @Column(name= "number_acc")
     private String number_acc;
 
     @Column(name="balance")
@@ -39,7 +42,7 @@ public class BankAccount
 
     }
 
-    public Long getTime_stamp() {
+    public long getTime_stamp() {
         return time_stamp;
     }
 
@@ -66,7 +69,7 @@ public class BankAccount
     {
         this.balance = balance;
     }
-
+    @Length(min = 10, max = 10, message = "Number Account must has length is 10", groups = CheckNumberAccount.class)
     public String getNumber_acc()
     {
         return number_acc;
