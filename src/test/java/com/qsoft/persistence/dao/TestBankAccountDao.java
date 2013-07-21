@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.sql.DataSource;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 
 /**
@@ -74,5 +75,12 @@ public class TestBankAccountDao {
         assertEquals(bankAccount.getNumber_acc(), checkAccount.getNumber_acc());
         assertEquals(bankAccount.getBalance(), checkAccount.getBalance());
         assertEquals(bankAccount.getTime_stamp(), checkAccount.getTime_stamp());
+    }
+    @Test
+    public void testGetInfoABankAccountFromDB(){
+        BankAccount account = bankAccountDAO.findAccount("0123456789");
+        assertNotNull(account);
+        assertEquals(account.getBalance(), 100);
+        assertEquals(account.getTime_stamp(), 1000);
     }
 }
