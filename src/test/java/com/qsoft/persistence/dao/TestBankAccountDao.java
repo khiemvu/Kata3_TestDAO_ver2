@@ -1,5 +1,6 @@
 package com.qsoft.persistence.dao;
 
+import com.qsoft.persistence.entities.BankAccount;
 import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
@@ -7,12 +8,15 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
+
+import static junit.framework.Assert.assertEquals;
 
 
 /**
@@ -62,4 +66,11 @@ public class TestBankAccountDao {
         iDatabaseTester.onTearDown();
     }
 
+    @Test
+    public void testOpenABankAccountThenSaveToDB(){
+        BankAccount bankAccount = new BankAccount("0123456789", 100L);
+        bankAccountDAO.saveAccount(bankAccount);
+        BankAccount checkAccount = bankAccountDAO.findAccount("0123456789");
+        assertEquals(bankAccount, checkAccount);
+    }
 }

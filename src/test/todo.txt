@@ -1,0 +1,11 @@
+1. kiem tra 1 bank account moi mo dc luu vao db
+2. kiem tra xem co lay duoc thong tin 1 bank account tu db
+3. kiem tra 1 bank account moi mo voi number account > 10 so co duoc luu vao db hay ko?
+4. kiem tra 1 bank account moi mo voi number account < 10 so co duoc luu vao db hay ko?
+5. kiem tra 1 bank account moi mo voi amount < 0 co duoc luu vao db hay ko?
+6. kiem tra 1 bank account moi mo khong co time_stamp co duoc luu vao db hay ko?
+7. kiem tra 1 transaction dung duoc thuc hien co duoc luu vao db hay ko?
+8. kiem tra 1 transaction voi amount < 0 co duoc luu vao db hay ko?
+9. kiem tra xem co lay duoc toan transaction cua 1 bank account hay ko?
+10. kiem tra xem co lay duoc toan bo transaction cua 1 bank account tu thoi diem time start toi time stop hay ko?
+11. kiem tra xem co lay duoc n transaction moi nhat cua 1 bank account hay ko?
