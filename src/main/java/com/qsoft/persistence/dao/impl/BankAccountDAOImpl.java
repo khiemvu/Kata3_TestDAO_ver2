@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,7 +28,9 @@ public class BankAccountDAOImpl implements BankAccountDAO {
     }
 
     @Override
-    public BankAccount findAccount(String accNumber) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public BankAccount findAccount(String number_acc) {
+        Query query = entityManager.createQuery("SELECT c from BankAccount c where c.number_acc = :number_acc");
+        query.setParameter("number_acc", number_acc);
+            return (BankAccount) query.getSingleResult();
     }
 }

@@ -68,9 +68,11 @@ public class TestBankAccountDao {
 
     @Test
     public void testOpenABankAccountThenSaveToDB(){
-        BankAccount bankAccount = new BankAccount("0123456789", 100L);
+        BankAccount bankAccount = new BankAccount("1234567890", 100L);
         bankAccountDAO.saveAccount(bankAccount);
-        BankAccount checkAccount = bankAccountDAO.findAccount("0123456789");
-        assertEquals(bankAccount, checkAccount);
+        BankAccount checkAccount = bankAccountDAO.findAccount("1234567890");
+        assertEquals(bankAccount.getNumber_acc(), checkAccount.getNumber_acc());
+        assertEquals(bankAccount.getBalance(), checkAccount.getBalance());
+        assertEquals(bankAccount.getTime_stamp(), checkAccount.getTime_stamp());
     }
 }
