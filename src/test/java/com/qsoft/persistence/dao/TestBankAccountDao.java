@@ -166,5 +166,6 @@ public class TestBankAccountDao {
         List<Transaction> transactionList = transactionDAO.getAllTransaction("0123456789", 2);
         assertEquals(2, transactionList.size());
         assertEquals("withdraw", transactionList.get(1).getDes());
+
     }
 }
