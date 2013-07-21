@@ -9,6 +9,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,12 @@ public class TestBankAccountDao {
     private IDatabaseTester iDatabaseTester;
 
     private static Validator validation;
+
+    @BeforeClass
+    public static void setUp() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validation = factory.getValidator();
+    }
 
     @Before
     public void setup() throws Exception
@@ -93,8 +100,6 @@ public class TestBankAccountDao {
     }
     @Test
     public void testSaveABankAccountWithLengthOfNumberAccountGreater10(){
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validation = factory.getValidator();
         BankAccount bankAccount = new BankAccount("01234567890", 100L);
 
         Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckNumberAccount.class);
@@ -103,8 +108,6 @@ public class TestBankAccountDao {
     }
     @Test
     public void testSaveABankAccountWithLengthOfNumberAccountLessThan10(){
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validation = factory.getValidator();
         BankAccount bankAccount = new BankAccount("012345678", 100L);
 
         Set<ConstraintViolation<BankAccount>> violations = validation.validate(bankAccount, CheckNumberAccount.class);
